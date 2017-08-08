@@ -1,5 +1,7 @@
-exports.copy = { command: "pbcopy", args: [] };
-exports.paste = { command: "pbpaste", args: [] };
+const env = { LANG: 'en_EN.UTF-8' };
+
+exports.copy = { command: "pbcopy", args: [], env };
+exports.paste = { command: "pbpaste", args: [], env };
 exports.paste.full_command = exports.paste.command;
 exports.encode = function(str) { return new Buffer(str, "utf8"); };
 exports.decode = function(chunks) {
