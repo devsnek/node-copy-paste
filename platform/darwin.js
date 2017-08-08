@@ -1,4 +1,4 @@
-const env = { LANG: 'en_EN.UTF-8' };
+const env = { LANG: 'en_US.UTF-8' };
 
 exports.copy = { command: "pbcopy", args: [], env };
 exports.paste = { command: "pbpaste", args: [], env };
