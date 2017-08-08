@@ -40,7 +40,9 @@ switch(process.platform) {
 var noop = function() {};
 
 exports.copy = function(text, callback) {
-	var child = spawn(config.copy.command, config.copy.args);
+	var child = spawn(config.copy.command, config.copy.args, {
+	  env: Object.assign({}, config.paste.env || {}, process.env),
+	});
 
 	var done = (callback ? function() { callback.apply(this, arguments); done = noop; } : noop);
 
@@ -77,7 +79,9 @@ var pasteCommand = [ config.paste.command ].concat(config.paste.args).join(" ");
 exports.paste = function(callback) {
 	if(execSync && !callback) { return config.decode(execSync(pasteCommand)); }
 	else if(callback) {
-		var child = spawn(config.paste.command, config.paste.args);
+		var child = spawn(config.paste.command, config.paste.args, {
+		  env: Object.assign({}, config.paste.env || {}, process.env),
+		});
 
 		var done = callback && function() { callback.apply(this, arguments); done = noop; };
 
